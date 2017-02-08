@@ -8,6 +8,6 @@ import io.vertx.core.AbstractVerticle;
 public class TestFeed extends AbstractVerticle {
     @Override
     public void start() throws Exception {
-        vertx.setPeriodic(2000, h -> vertx.eventBus().publish("test-feed", "from server...."));
+        vertx.setPeriodic(2000, h -> vertx.eventBus().publish("test-feed", "from java...."));
     }
 }

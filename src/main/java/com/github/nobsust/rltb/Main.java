@@ -20,6 +20,6 @@ public class Main extends AbstractVerticle {
         Vertx vertx = Vertx.vertx();
         vertx.deployVerticle(new ServerVerticle());
         vertx.deployVerticle(new TestFeed());
-
+        vertx.deployVerticle("js/testFeed.js");
     }
 }
