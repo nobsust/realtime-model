@@ -24,7 +24,7 @@
   var eb = new EventBus("http://localhost:8080/eventbus");
   eb.onopen = function () {
     eb.registerHandler("test-feed", function (err, msg) {
-      var str = "<code>" + msg.body + "</code><br>";
+      var str = "<code>" + JSON.stringify(msg.body) + "</code><br>";
       $('#status').prepend(str);
     })
   }

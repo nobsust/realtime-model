@@ -3,6 +3,8 @@ package com.github.nobsust.rltb;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Vertx;
 
+import java.util.ArrayList;
+
 /**
  * Created by Sam on 2/8/2017.
  */
@@ -19,7 +21,7 @@ public class Main extends AbstractVerticle {
 
         Vertx vertx = Vertx.vertx();
         vertx.deployVerticle(new ServerVerticle());
-        vertx.deployVerticle(new TestFeed());
+        //vertx.deployVerticle(new TestFeed());
         vertx.deployVerticle("js/testFeed.js");
     }
 }
