@@ -16,14 +16,27 @@ public class ServerVerticle extends AbstractVerticle {
     @Override
     public void start() throws Exception {
         Router router = Router.router(vertx);
-        BridgeOptions options = new BridgeOptions().addOutboundPermitted(new PermittedOptions().setAddress("test-feed"));
-        router.route("/eventbus/*").handler(SockJSHandler.create(vertx).bridge(options, event -> {
+
+        // test feed
+        BridgeOptions testFeedoptions = new BridgeOptions().addOutboundPermitted(new PermittedOptions().setAddress("test-feed"));
+        router.route("/eventbus/test-feed/*").handler(SockJSHandler.create(vertx).bridge(testFeedoptions, event -> {
             if (event.type() == BridgeEvent.Type.SOCKET_CREATED) {
-                System.out.println("socket was created");
+                System.out.println("test feed socket was created");
             }
             event.complete(true);
         }));
+
+        // dendrogram feed
+        BridgeOptions dendrogramFeedOptions = new BridgeOptions().addOutboundPermitted(new PermittedOptions().setAddress("dendrogram-feed"));
+        router.route("/eventbus/dendrogram-feed/*").handler(SockJSHandler.create(vertx).bridge(dendrogramFeedOptions, event -> {
+            if (event.type() == BridgeEvent.Type.SOCKET_CREATED) {
+                System.out.println("dendrogram feed socket was created");
+            }
+            event.complete(true);
+        }));
+
         router.route().handler(StaticHandler.create());
+
         vertx.createHttpServer().requestHandler(router::accept).listen(8080);
     }
 }

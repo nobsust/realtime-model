@@ -4,12 +4,21 @@
     <script src="jquery-1.11.2.min.js"></script>
     <script src="sockjs.min.js"></script>
     <script src="vertx-eventbus.js"></script>
+    <script src="sigma.min.js"></script>
 </head>
 
 <style>
   .test-feed {
     font-size: 15pt;
   }
+
+  #container {
+    max-width: 400px;
+    height: 400px;
+    margin: auto;
+  }
+
+
 
 </style>
 
@@ -21,13 +30,14 @@
 <div id="status" class="test-feed"></div>
 
 <script>
-  var eb = new EventBus("http://localhost:8080/eventbus");
+  var eb = new EventBus("http://localhost:8080/eventbus/test-feed/");
   eb.onopen = function () {
     eb.registerHandler("test-feed", function (err, msg) {
       var str = "<code>" + JSON.stringify(msg.body) + "</code><br>";
       $('#status').prepend(str);
     })
   }
+
 
 </script>
 
