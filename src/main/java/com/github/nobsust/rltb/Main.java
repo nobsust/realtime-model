@@ -22,5 +22,6 @@ public class Main extends AbstractVerticle {
         vertx.deployVerticle(new TestFeed());
         vertx.deployVerticle("js/testFeed.js");
         vertx.deployVerticle("js/dendrogramFeed.js");
+        vertx.deployVerticle("js/applicationVerticle.js");
     }
 }

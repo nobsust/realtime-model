@@ -259,7 +259,6 @@ vertx.setPeriodic(100, function(id) {
     if(cursor < 250.0) {
         arr = flare.slice(0, cursor++);
     } else {
-        console.log(flare.lenght);
         arr = flare;
     }
     vertx.eventBus().publish("dendrogram-feed", arr);

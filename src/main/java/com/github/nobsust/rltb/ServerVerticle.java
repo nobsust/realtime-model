@@ -35,6 +35,15 @@ public class ServerVerticle extends AbstractVerticle {
             event.complete(true);
         }));
 
+        // application feed
+        BridgeOptions applicationFeedOptions = new BridgeOptions().addOutboundPermitted(new PermittedOptions().setAddress("application-feed"));
+        router.route("/eventbus/application-feed/*").handler(SockJSHandler.create(vertx).bridge(applicationFeedOptions, event -> {
+            if (event.type() == BridgeEvent.Type.SOCKET_CREATED) {
+                System.out.println("application feed socket was created");
+            }
+            event.complete(true);
+        }));
+
         router.route().handler(StaticHandler.create());
 
         vertx.createHttpServer().requestHandler(router::accept).listen(8080);
