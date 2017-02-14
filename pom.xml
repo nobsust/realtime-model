@@ -11,7 +11,15 @@
     <properties>
         <vertx.version>3.0.0</vertx.version>
         <main.verticle>com.github.nobsust.rltb.Main</main.verticle>
+        <eclipse.paho.url>https://repo.eclipse.org/content/repositories/paho-releases</eclipse.paho.url>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>Eclipse Paho Repo</id>
+            <url>${eclipse.paho.url}</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -34,6 +42,16 @@
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web</artifactId>
             <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-mongo-client</artifactId>
+            <version>3.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.paho</groupId>
+            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>

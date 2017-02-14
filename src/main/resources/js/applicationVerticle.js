@@ -21,6 +21,7 @@ claz.fields.push(field);
 field.id = 'firstName';
 field.name = 'First Name';
 field.type = 'text';
+field.value = '';
 
 function pack(app) {
 
@@ -50,7 +51,7 @@ function pack(app) {
 
 }
 
-var packedApp = pack(app);
+pack(app);
 
 vertx.setPeriodic(3000, function(id) {
     vertx.eventBus().publish("application-feed", app);
