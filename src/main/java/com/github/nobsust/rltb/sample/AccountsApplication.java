@@ -1,8 +1,11 @@
 package com.github.nobsust.rltb.sample;
 
 import com.github.nobsust.rltb.core.*;
+import com.google.gson.Gson;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
+
+import java.util.Map;
 
 /**
  * Created by Sam on 2/21/2017.
@@ -31,8 +34,20 @@ public class AccountsApplication extends AbstractVerticle {
 
         application.pack();
 
+        Map<String, Identifier> identifiers = application.getSubIdentifiers();
+
         EventBus eventBus = vertx.eventBus();
-        eventBus.publish("app.persist-ready", "Yay! Someone kicked a ball");
+
+        Gson gson = new Gson();
+        String appJson = gson.toJson(application);
+
+        eventBus.send("app.persist-ready", appJson, reply -> {
+            if (reply.succeeded()) {
+                System.out.println("Received reply " + reply.result().body());
+            } else {
+                System.out.println("No reply");
+            }
+        });
 
     }
 

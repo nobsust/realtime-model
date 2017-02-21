@@ -13,9 +13,8 @@ public class Main extends AbstractVerticle {
     @Override
     public void start(Future<Void> startFuture) throws Exception {
 
-
-        vertx.deployVerticle(new AccountsApplication());
         vertx.deployVerticle(new AppPersister());
+        vertx.deployVerticle(new AccountsApplication());
 
         /*vertx.deployVerticle(new AppPersister(), res -> {
             if (res.succeeded()) {

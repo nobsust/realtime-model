@@ -1,6 +1,8 @@
 package com.github.nobsust.rltb.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,9 +12,16 @@ public class Application extends ParentIdentifier {
 
     private Map<String, Identifier> subIdentifiers;
 
+    private List<Identifier> moduleList;
+    private List<Identifier> classeList;
+    private List<Identifier> fieldList;
+
     public Application(String applicationId) {
         super(applicationId);
         subIdentifiers = new HashMap<>();
+        moduleList = new ArrayList<>();
+        classeList = new ArrayList<>();
+        fieldList = new ArrayList<>();
     }
 
     public Map<String, Identifier> getSubIdentifiers() {
@@ -29,6 +38,7 @@ public class Application extends ParentIdentifier {
             Module module = (Module) moduleEntry.getValue();
             String moduleId = appId + "." + moduleKey.getValue();
             subIdentifiers.put(moduleId, module);
+            moduleList.add(module);
 
             // classes
             Map<Id, Identifier> classes = module.getIdentifiers();
@@ -37,6 +47,7 @@ public class Application extends ParentIdentifier {
                 Claz claz = (Claz) classEntry.getValue();
                 String clazId = moduleId + "." + classKey.getValue();
                 subIdentifiers.put(clazId, claz);
+                classeList.add(claz);
 
                 // fields
                 Map<Id, Identifier> fields = claz.getIdentifiers();
@@ -45,6 +56,7 @@ public class Application extends ParentIdentifier {
                     Field field = (Field) fieldEntry.getValue();
                     String fieldId = clazId + "." + fieldKey.getValue();
                     subIdentifiers.put(fieldId, field);
+                    fieldList.add(field);
                 }
             }
         }
